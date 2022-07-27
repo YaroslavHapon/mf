@@ -16,7 +16,7 @@ export default function App() {
     <StylesProvider generateClassName={generateClassName}>
       <BrowserRouter>
         <div>
-          <h1>Hello!!!!!!!!</h1>
+          <h1>Stop that!</h1>
           <Header />
           <MarketingApp />
         </div>
