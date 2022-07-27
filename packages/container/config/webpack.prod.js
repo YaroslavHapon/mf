@@ -11,6 +11,11 @@ const prodConfig = {
   output: {
     // generic filename and hash function
     filename: "[name].[contenthash].js",
+    // publicPath of output files isn't known at compile time
+    // Allows to set some path for HTMLWebpackPlugin so it can access file
+    publicPath: "/container/latest/",
+    // HTMLWebpackPlugin will prepend path like this
+    // http://domain.com/container/latest/[name].[contenthash].js
   },
   plugins: [
     new ModuleFederationPlugin({
