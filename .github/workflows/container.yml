@@ -9,8 +9,8 @@ on:
       - master
     # Only run this flow when make some changes inside the container
     path:
-      - "packages/container/**"
-      - "!packages/marketing/**"
+      - "packages/container/**/*"
+      - "!packages/marketing/**/*"
 
 defaults:
   run:
