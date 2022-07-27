@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - master
-    path:
+    paths:
       - "packages/marketing/**/*"
       - "!packages/container/**/*"
 
