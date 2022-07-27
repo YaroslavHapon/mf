@@ -22,7 +22,7 @@ const prodConfig = {
       name: "container",
       remotes: {
         // replacement of localhost:8081 at production for our remotes
-        marketing: `marketing@${domain}/marketing/remoteEntry.js`,
+        marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies,
     }),

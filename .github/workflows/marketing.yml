@@ -1,4 +1,4 @@
-name: deploy-container
+name: deploy-marketing
 # Controls when the workflow will run
 
 # What events we are looking for
@@ -8,12 +8,12 @@ on:
     branches: ["master"]
     # Only run this flow when make some changes inside the container
     path:
-      - "packages/container/**"
+      - "packages/marketing/**"
 
 defaults:
   run:
     # Allows you to run this workflow manually from the Actions tab
-    working-directory: "packages/container"
+    working-directory: "packages/marketing"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,20 +32,22 @@ jobs:
         run: |
           npm install
           npm run build
-         env:
-          PRODUCTION_DOMAIN: ${{ secret.PRODUCTION_DOMAIN }}
 
       - name: Upload to S3
         run: |
-          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
 
+      # invalidation - whenever we create new file in our S3 bucket that file
+      # is going to be sent to cloudfront, however when we will update that file
+      # cloudfront will not get automatically used of it, to get CLF use that file
+      # we need to create invalidation and then CLF will update that file
       - name: Cloudfront invalidation
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/marketing/latest/remoteEntry.js"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
