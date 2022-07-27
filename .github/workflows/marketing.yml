@@ -4,9 +4,10 @@ name: deploy-marketing
 # What events we are looking for
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Only run this flow when make some changes inside the container
   push:
-    branches: ["master"]
-    # Only run this flow when make some changes inside the container
+    branches:
+      - master
     path:
       - "packages/marketing/**"
 
@@ -18,7 +19,7 @@ defaults:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build_and_preview:
+  build:
     # runs on Linux based VM
     runs-on: ubuntu-latest
 
