@@ -33,7 +33,7 @@ jobs:
           npm install
           npm run build
         env:
-          PRODUCTION_DOMAIN: ${{ secret.PRODUCTION_DOMAIN }}
+          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
       - name: Upload to S3
         run: |
