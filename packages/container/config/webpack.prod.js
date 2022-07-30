@@ -24,7 +24,7 @@ const prodConfig = {
       remotes: {
         // replacement of localhost:8081 at production for our remotes
         marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
-        marketing: `auth@${domain}/auth/latest/remoteEntry.js`,
+        auth: `auth@${domain}/auth/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies,
     }),
