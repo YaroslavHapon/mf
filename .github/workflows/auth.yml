@@ -10,7 +10,6 @@ on:
       - master
     paths:
       - "packages/auth/**/*"
-      - "!packages/auth/**/*"
 
 defaults:
   run:
@@ -36,7 +35,6 @@ jobs:
           npm run build
 
       - name: Upload to S3
-        # Thinking of the distribution folder with our S3 bucket
         run: |
           aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/auth/latest
         env:
