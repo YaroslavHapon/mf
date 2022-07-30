@@ -1,8 +1,8 @@
-import { mount } from "marketing/MarketingIndex";
+import { mount } from "auth/AuthApp";
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ setIsSignedIn }) => {
   // useRef returns a mutable ref object whose .current property is initialized
   // to the passed argument (initialValue).
   // The returned object will persist for the full lifetime of the component.
@@ -22,6 +22,10 @@ export default () => {
         if (pathname !== nextPathname) {
           history.push(nextPathname);
         }
+      },
+      onSignIn() {
+        setIsSignedIn(true);
+        console.log("Signed in detect!");
       },
     });
 

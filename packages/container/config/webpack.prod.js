@@ -3,7 +3,8 @@ const commonConfig = require("./webpack.common");
 const packageJson = require("../package.json");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-// We can setup this environment variable during our CI/CD pipeline at AWS
+// We can setup this environment variable during our CI/CD pipeline to AWS
+// At github action
 const domain = process.env.PRODUCTION_DOMAIN;
 
 const prodConfig = {
@@ -23,6 +24,7 @@ const prodConfig = {
       remotes: {
         // replacement of localhost:8081 at production for our remotes
         marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
+        marketing: `auth@${domain}/auth/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies,
     }),

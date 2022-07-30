@@ -6,7 +6,7 @@ import App from "./App";
 
 // Mount function to start-up the app
 // If we are in DEV mode and in isolation call mount immediately
-function mount(el, { onNavigate, defaultHistory, initialPath }) {
+function mount(el, { onSignIn, onNavigate, defaultHistory, initialPath }) {
   // use defaultHistory or otherwise use createMemoryHistory
   // defaultHistory will only be provided if we use our app in isolation
   const history =
@@ -19,7 +19,7 @@ function mount(el, { onNavigate, defaultHistory, initialPath }) {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, el);
+  ReactDOM.render(<App history={history} onSignIn={onSignIn} />, el);
 
   // We can return a set of function that our Container can use
   return {
@@ -35,7 +35,7 @@ function mount(el, { onNavigate, defaultHistory, initialPath }) {
 
 // Running the Marketing MF app in ISOLATION (Locally 8081)
 if (process.env.NODE_ENV === "development") {
-  const devRoot = document.querySelector("#_marketing-dev-root");
+  const devRoot = document.querySelector("#_auth-dev-root");
   if (devRoot) {
     mount(devRoot, { defaultHistory: createBrowserHistory() });
   }
