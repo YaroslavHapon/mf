@@ -6,14 +6,6 @@ import {
 } from "@material-ui/core/styles";
 import { createBrowserHistory } from "history";
 
-// import MarketingApp from "./components/MarketingApp";
-// import AuthApp from "./components/AuthApp";
-// Create a variable which value will be the result of calling of
-// the lazy function
-// MarketingLazy itself is a React Component, so we can choose to show
-// that component only is some cases. And whenever we show it,
-// this lazy thing is gonna go and try to import code (js files) related to
-// file (module) in our Route path.
 const MarketingLazy = lazy(() => import("./components/MarketingApp"));
 const AuthLazy = lazy(() => import("./components/AuthApp"));
 const DashboardLazy = lazy(() => import("./components/DashboardApp"));
@@ -45,10 +37,6 @@ export default function App() {
           isSignedIn={isSignedIn}
           onSignOut={() => setIsSignedIn(false)}
         />
-        {/*
-          Fallback will be shown only when we are loading some code related
-          to the MarketingApp or AuthApp
-        */}
         <Suspense fallback={<Progress />}>
           <Switch>
             <Route path="/auth">
